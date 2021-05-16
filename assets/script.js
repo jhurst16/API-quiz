@@ -11,7 +11,7 @@ var questions = [
     },
     //question 2
     {
-        qPrompt: 'The condition in an if/else statement us enclosed within',
+        qPrompt: 'The condition in an if/else statement is enclosed within',
         choicesPrompt: ['quotes', 'curly braces', 'parenthesis', 'square brackets'],
         answer: 'curly braces',
     },
