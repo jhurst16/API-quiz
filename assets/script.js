@@ -114,20 +114,23 @@ function checkAnswer(choice) {
         clearInterval(intervalId)
         var questionContainer = document.querySelector('#question-container')
         questionContainer.style.display = "none"
-
+        var displayScore = document.querySelector('#display-score')
         document.getElementById('save-highscore')
             .addEventListener('click', function () {
-                var highscores = []
+                var highscores = JSON.parse(localStorage.getItem("highscore"))
                 highscores.push({
-                    intials: 'jsh',
+                    intials: document.getElementById('initials').value,
                     score: timer
                 })
-                window.localStorage.setItem('highscore', highscores)
+                window.localStorage.setItem("highscore", JSON.stringify(highscores));
+                displayScore.style.display = 'none'
+                var displayHighscores = document.querySelector('#display-highscores')
+                displayHighscores.style.display = 'block'
             })
 
 
 
-        var displayScore = document.querySelector('#display-score')
+
         displayScore.style.display = 'block'
 
         //set up a button to clear highscores

@@ -1,70 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/style.css" />
     <title>Coding Quiz</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="flex">
-      <h2>
-        Coding Quiz!
-      </h2>
-      <div id="timer">
+        <h2>
+            Coding Quiz!
+        </h2>
+        <div id="timer">
 
-      </div>
+        </div>
     </div>
     <div class="flex">
-      <div id="start-container" class="flex">
-        <p>
-            Press the start quiz button to start a timed quiz, where if you get a
-            question wrong you lose time!
-          </p>
-        <button id="start-quiz">
-          Start Quiz
-        </button>
+        <div id="start-container" class="flex">
+            <p>
+                Press the start quiz button to start a timed quiz, where if you get a
+                question wrong you lose time!
+            </p>
+            <button id="start-quiz">
+                Start Quiz
+            </button>
 
-      
-      </div>
 
-      <div class="flex" id="question-container" style="display: none;">
-        <h3 id="question-content"></h3>
-        <ul>
-          <li id="choice1"></li>
-
-          <li id="choice2"></li>
-
-          <li id="choice3"></li>
-
-          <li id="choice4"></li>
-
-          <li id="choice5"></li>
-        </ul>
-      </div>
-
-      <div id="display-score" style="display: none;">
-        <h3>
-          All Done!
-        </h3>
-        <p>
-            Your HighScore Is:<span id="highscore">
-
-            </span>
-        </p>
-        <div>
-          <label for="initials">Enter your initials:</label>
-          <input type="text" id="initials" name="intitials" />
-          <button id="save-highscore">
-            Save HighScore
-          </button>
-          <br />
         </div>
-      </div>
+
+        <div class="flex" id="question-container" style="display: none;">
+            <h3 id="question-content"></h3>
+            <ul>
+                <li id="choice1"></li>
+
+                <li id="choice2"></li>
+
+                <li id="choice3"></li>
+
+                <li id="choice4"></li>
+
+                <li id="choice5"></li>
+            </ul>
+        </div>
+
+        <div id="display-score" style="display: none;">
+            <h3>
+                All Done!
+            </h3>
+            <p>
+                Your HighScore Is:<span id="highscore">
+
+                </span>
+            </p>
+            <div>
+                <label for="initials">Enter your initials:</label>
+                <input type="text" id="initials" name="intitials" />
+                <button id="save-highscore">
+                    Save HighScore
+                </button>
+                <br />
+            </div>
+        </div>
+        <div id="display-highscores" style="display: none;">
+            <h3>
+                HighScores!
+            </h3>
+            <ul id="score-list"></ul>
+        </div>
     </div>
 
     <script src="./assets/script.js"></script>
-  </body>
+</body>
+
 </html>
