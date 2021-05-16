@@ -24,7 +24,7 @@ var questions = [
             'booleans',
             'all of the above',
         ],
-        answer: 'all of the above'
+        answer: 'all of the above',
     },
     //question4
     {
@@ -39,7 +39,7 @@ var questions = [
             'A very useful tool during development and debugging for printing content to the debugger is',
         choicesPrompt: ['javascript', 'terminal/bash', 'for loops', 'console log'],
         answer: 'console log',
-    }
+    },
 ]
 
 var timer = 75
@@ -48,6 +48,11 @@ var currentQuestionIndex = 0
 var score = null
 var intervalId = null
 var timerEl = document.getElementById('timer')
+var startContainer = document.getElementById('start-container')
+var displayHighscores = document.querySelector('#display-highscores')
+var displayScore = document.querySelector('#display-score')
+var orderedScore = document.getElementById('ordered-score')
+var answerResult = document.getElementById('answer-result')
 
 function setTimer(time) {
     timer = time
@@ -58,10 +63,10 @@ function setTimer(time) {
 var buttonEl = document.querySelector('#start-quiz')
 buttonEl.addEventListener('click', function () {
     document.getElementById('question-container').style.display = 'flex'
-    document.getElementById('start-container').style.display = 'none'
+    startContainer.style.display = 'none'
     setQuestion(0) //hide "start quiz" button
     intervalId = setInterval(function () {
-        setTimer(timer - 1)             //decrement time here if answered wrong
+        setTimer(timer - 1) //decrement time here if answered wrong
 
         if (timer < 1) {
             //stop timer from going negative
@@ -73,7 +78,6 @@ buttonEl.addEventListener('click', function () {
 
 function setQuestion(index) {
     //sets question to registered index
-
 
     currentQuestionIndex = index
     currentQuestion = questions[index]
@@ -101,49 +105,71 @@ function checkAnswer(choice) {
     var correctAnswer = currentQuestion.answer
 
     if (choice === correctAnswer) {
+        answerResult.innerHTML = 'correct'
+    } else {
 
-    }
-
-    else {
+        answerResult.innerHTML = 'incorrect'
         setTimer(timer - 10) //set limit to # of questions
     }
+    setTimeout(function () {
+        answerResult.innerHTML = ''
+    }, 500)
 
     var nextIndex = currentQuestionIndex + 1
 
     if (nextIndex >= questions.length) {
         clearInterval(intervalId)
         var questionContainer = document.querySelector('#question-container')
-        questionContainer.style.display = "none"
-        var displayScore = document.querySelector('#display-score')
-        document.getElementById('save-highscore')
-            .addEventListener('click', function () {
-                var highscores = JSON.parse(localStorage.getItem("highscore"))
-                highscores.push({
-                    intials: document.getElementById('initials').value,
-                    score: timer
-                })
-                window.localStorage.setItem("highscore", JSON.stringify(highscores));
-                displayScore.style.display = 'none'
-                var displayHighscores = document.querySelector('#display-highscores')
-                displayHighscores.style.display = 'block'
-            })
-
-
-
-
+        questionContainer.style.display = 'none'
         displayScore.style.display = 'block'
 
-        //set up a button to clear highscores
-
-
         document.getElementById('highscore').innerHTML = timer
-    }
-    else {
+    } else {
         setQuestion(currentQuestionIndex + 1)
     }
 }
 
+document.getElementById('retry-quiz').addEventListener('click', function () {
+    displayHighscores.style.display = 'none'
+    startContainer.style.display = 'flex'
+    timer = 75
+    orderedScore.innerHTML = ''
+})
 
+document.getElementById('save-highscore')
+    .addEventListener('click', function () {
+        var highscores = JSON.parse(localStorage.getItem('highscore'))
+        if (highscores === null) {
+            highscores = []
+        }
+        //PUSHES LAST HIGHSCORE INTO LOCAL STORAGE
+        highscores.push({
+            initials: document.getElementById('initials').value,
+            score: timer,
+        })
+        window.localStorage.setItem('highscore', JSON.stringify(highscores))
+        displayScore.style.display = 'none'
+
+        displayHighscores.style.display = 'block'
+        // sort by value
+        highscores.sort(function (a, b) {
+            return b.score - a.score;
+        });
+        for (i = 0; i <= highscores.length - 1; i++) {
+            var li = document.createElement('li')
+            var highscore = highscores[i]
+            li.innerHTML = highscore.initials + ': ' + highscore.score
+            orderedScore.appendChild(li)
+        }
+
+        //set up a button to clear highscores
+        var clearHighscores = document
+            .querySelector('#clear-highscores')
+            .addEventListener('click', function () {
+                localStorage.clear()
+                orderedScore.innerHTML = ''
+            })
+    })
 
 document.querySelectorAll('li').forEach(function (li) {
     li.addEventListener('click', function (e) {

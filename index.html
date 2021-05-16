@@ -44,6 +44,9 @@
 
                 <li id="choice5"></li>
             </ul>
+            <p id="answer-result">
+
+            </p>
         </div>
 
         <div id="display-score" style="display: none;">
@@ -57,18 +60,26 @@
             </p>
             <div>
                 <label for="initials">Enter your initials:</label>
-                <input type="text" id="initials" name="intitials" />
+                <input type="text" id="initials" name="initials" />
                 <button id="save-highscore">
                     Save HighScore
                 </button>
                 <br />
             </div>
         </div>
-        <div id="display-highscores" style="display: none;">
+        <div id="display-highscores" class="flex" style="display: none;">
             <h3>
                 HighScores!
             </h3>
-            <ul id="score-list"></ul>
+            <ul id="ordered-score">
+
+            </ul>
+            <button id="clear-highscores">
+                Clear Highscores!
+            </button>
+            <button id="retry-quiz">
+                Back to Start Quiz!
+            </button>
         </div>
     </div>
 
